@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Prediction</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1f2a44 0%, #2e5a88 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #243b53;
+        }
+
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 28px;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: #cfdcef;
+            font-size: 0.95rem;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .field {
+            margin-bottom: 18px;
+        }
+
+        .field label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+        }
+
+        .field input,
+        .field select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: #f8fafc;
+            color: #243b53;
+        }
+
+        .field input:focus,
+        .field select:focus {
+            outline: none;
+            border-color: #2e5a88;
+            background: #ffffff;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 0 20px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            background: #2e5a88;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1f2a44;
+        }
+
+        .link {
+            color: #2e5a88;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+
+        .note {
+            margin-top: 18px;
+            font-size: 0.85rem;
+            color: #627d98;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>House Price Prediction</h1>
+            <p>Enter the property details below and choose a model to estimate the price.</p>
+        </header>
+
+        <div class="card">
+            <form method="POST" action="/predict">
+                <div class="field">
+                    <label for="model">Model</label>
+                    <select id="model" name="model" required>
+                        {% for name in model_names %}
+                        <option value="{{ name }}">{{ name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="grid">
+                    <div class="field">
+                        <label for="Avg. Area Income">Avg. Area Income</label>
+                        <input type="number" step="any" id="Avg. Area Income" name="Avg. Area Income" placeholder="e.g. 50000" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="Avg. Area House Age">Avg. Area House Age</label>
+                        <input type="number" step="any" id="Avg. Area House Age" name="Avg. Area House Age" placeholder="e.g. 5" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="Avg. Area Number of Rooms">Avg. Area Number of Rooms</label>
+                        <input type="number" step="any" id="Avg. Area Number of Rooms" name="Avg. Area Number of Rooms" placeholder="e.g. 6" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="Avg. Area Number of Bedrooms">Avg. Area Number of Bedrooms</label>
+                        <input type="number" step="any" id="Avg. Area Number of Bedrooms" name="Avg. Area Number of Bedrooms" placeholder="e.g. 3" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="Area Population">Area Population</label>
+                        <input type="number" step="any" id="Area Population" name="Area Population" placeholder="e.g. 30000" required>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button type="submit">Predict Price</button>
+                    <a class="link" href="/results">View model evaluation results</a>
+                </div>
+            </form>
+
+            <p class="note">All fields must be numeric. The selected model is loaded from its saved pickle file.</p>
+        </div>
+    </div>
+</body>
+</html>

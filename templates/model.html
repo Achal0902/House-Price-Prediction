@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Evaluation Results</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1f2a44 0%, #2e5a88 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #243b53;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 28px;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: #cfdcef;
+            font-size: 0.95rem;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 28px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+            overflow-x: auto;
+        }
+
+        h2 {
+            font-size: 1.15rem;
+            margin-bottom: 16px;
+            color: #1f2a44;
+        }
+
+        table.data {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        table.data th,
+        table.data td {
+            border: 1px solid #d9e2ec;
+            padding: 10px 14px;
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        table.data th {
+            background: #2e5a88;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        table.data tr:nth-child(even) {
+            background: #f0f4f8;
+        }
+
+        table.data tr:hover {
+            background: #e1ecf7;
+        }
+
+        table.data td:first-child,
+        table.data th:first-child {
+            text-align: left;
+        }
+
+        .actions {
+            margin-top: 22px;
+        }
+
+        .link {
+            color: #2e5a88;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Model Evaluation Results</h1>
+            <p>Performance metrics for every trained regression model on the test set.</p>
+        </header>
+
+        <div class="card">
+            <h2>{{ titles | join(', ') }}</h2>
+            {% for table in tables %}
+            {{ table | safe }}
+            {% endfor %}
+
+            <div class="actions">
+                <a class="link" href="/">&larr; Back to prediction form</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
